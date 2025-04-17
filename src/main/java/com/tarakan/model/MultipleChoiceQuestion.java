@@ -1,7 +1,5 @@
 package com.tarakan.model;
 
-import org.bson.types.ObjectId;
-
 import java.util.List;
 
 public class MultipleChoiceQuestion extends Question implements Evaluatable {
@@ -18,10 +16,6 @@ public class MultipleChoiceQuestion extends Question implements Evaluatable {
 
     public List<String> getOptions() {
         return options;
-    }
-
-    public void setId(ObjectId objectId) {
-        this.id = objectId;
     }
 
     public int getCorrectOptionIndex() {

@@ -1,7 +1,5 @@
 package com.tarakan.model;
 
-import org.bson.types.ObjectId;
-
 public class TrueFalseQuestion extends Question {
     private boolean correctAnswer;
 
@@ -14,18 +12,12 @@ public class TrueFalseQuestion extends Question {
 
     @Override
     public boolean evaluate(Object response) {
-        if (!(response instanceof Boolean)) {
-            return false;
-        }
+        if (!(response instanceof Boolean)) return false;
         return ((Boolean) response) == correctAnswer;
     }
 
     public boolean isCorrectAnswer() {
         return correctAnswer;
-    }
-
-    public void setId(ObjectId objectId) {
-        this.id = objectId;
     }
 
     @Override

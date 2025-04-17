@@ -1,13 +1,11 @@
 package com.tarakan.service;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tarakan.repository.QuizRepository;
 import com.tarakan.config.CreateQuizzesFile;
 import com.tarakan.exception.QuizException;
-import org.bson.types.ObjectId;
 import com.tarakan.model.Quiz;
 import java.io.IOException;
 import java.util.List;
@@ -22,12 +20,6 @@ public class QuizService {
         this.quizRepository = quizRepository;
         this.objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        // Configure ObjectMapper to handle ObjectId
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(ObjectId.class, new ObjectIdSerializer());
-        module.addDeserializer(ObjectId.class, new ObjectIdDeserializer());
-        objectMapper.registerModule(module);
         loadQuizzesFromFile();
     }
 
@@ -42,7 +34,7 @@ public class QuizService {
         return quizRepository.findAll();
     }
 
-    public void deleteQuiz(ObjectId id) throws QuizException {
+    public void deleteQuiz(String id) throws QuizException {
         Quiz quiz = quizRepository.findById(id);
         if (quiz == null) throw new QuizException("Quiz not found with id: " + id);
         quizRepository.delete(id);
@@ -53,14 +45,17 @@ public class QuizService {
         try {
             File file = new File(QUIZZES_FILE_PATH);
             if (file.exists()) {
-                List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<List<Quiz>>() {});
+                List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<>() {
+                });
                 quizRepository.saveAll(quizzes);
                 System.out.println("Loaded " + quizzes.size() + " quizzes from file");
             } else {
                 System.out.println("No quizzes file found. Creating sample quizzes...");
                 CreateQuizzesFile.createQuizzesFile();
+
                 if (file.exists()) {
-                    List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<List<Quiz>>() {});
+                    List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<>() {
+                    });
                     quizRepository.saveAll(quizzes);
                     System.out.println("Loaded " + quizzes.size() + " sample quizzes");
                 } else {

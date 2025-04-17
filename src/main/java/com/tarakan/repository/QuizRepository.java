@@ -1,25 +1,24 @@
 package com.tarakan.repository;
 
 import com.tarakan.model.Quiz;
-import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class QuizRepository {
-    private final Map<ObjectId, Quiz> quizzes;
+    private final Map<String, Quiz> quizzes;
 
     public QuizRepository() {
         this.quizzes = new HashMap<>();
     }
 
     public void save(Quiz quiz) {
-        if (quiz.getId() == null) quiz.setId(new ObjectId());
+        if (quiz.getId() == null) quiz.setId(java.util.UUID.randomUUID().toString());
         quizzes.put(quiz.getId(), quiz);
     }
 
-    public Quiz findById(ObjectId id) {
+    public Quiz findById(String id) {
         return quizzes.get(id);
     }
 
@@ -27,7 +26,7 @@ public class QuizRepository {
         return new ArrayList<>(quizzes.values());
     }
 
-    public void delete(ObjectId id) {
+    public void delete(String id) {
         quizzes.remove(id);
     }
 

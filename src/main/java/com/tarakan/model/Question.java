@@ -2,7 +2,6 @@ package com.tarakan.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.bson.types.ObjectId;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -12,8 +11,9 @@ import org.bson.types.ObjectId;
         @JsonSubTypes.Type(value = MultipleChoiceQuestion.class, name = "MultipleChoiceQuestion"),
         @JsonSubTypes.Type(value = TrueFalseQuestion.class, name = "TrueFalseQuestion")
 })
+
 public abstract class Question implements Evaluatable {
-    protected ObjectId id;
+    protected String id;
     protected String text;
     protected int points;
 
@@ -28,16 +28,22 @@ public abstract class Question implements Evaluatable {
         return text;
     }
 
+
     @Override
     public int getPoints() {
         return points;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", text='" + text + '\'' +
+                ", points=" + points +
                 '}';
     }
 }
