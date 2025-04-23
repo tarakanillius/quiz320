@@ -11,7 +11,7 @@ public class MultipleChoiceQuestion extends Question implements Evaluatable {
     public MultipleChoiceQuestion(String text, int points, List<String> options, int correctOptionIndex) {
         super(text, points);
         this.options = options;
-        this.correctOptionIndex = correctOptionIndex;
+        this.correctOptionIndex = correctOptionIndex+1;
     }
 
     public List<String> getOptions() {

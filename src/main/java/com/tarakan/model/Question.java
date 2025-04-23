@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 
 public abstract class Question implements Evaluatable {
-    protected String id;
     protected String text;
     protected int points;
 
@@ -26,10 +25,6 @@ public abstract class Question implements Evaluatable {
 
     public String getText() {
         return text;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Override

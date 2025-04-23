@@ -3,7 +3,7 @@ package com.tarakan;
 import com.tarakan.repository.QuizRepository;
 import com.tarakan.service.QuizService;
 import com.tarakan.config.CreateFile;
-import com.tarakan.cli.QuizCLI;
+import com.tarakan.cli.CliApplication;
 import java.io.File;
 
 public class Main {
@@ -16,7 +16,7 @@ public class Main {
 
         QuizRepository quizRepository = new QuizRepository();
         QuizService quizService = new QuizService(quizRepository);
-        QuizCLI cli = new QuizCLI(quizService);
+        CliApplication cli = new CliApplication(quizService);
         cli.start();
     }
 }

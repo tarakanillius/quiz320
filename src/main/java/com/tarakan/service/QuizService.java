@@ -23,8 +23,7 @@ public class QuizService {
     }
 
     public void createQuiz(Quiz quiz) throws QuizException {
-        if (quiz.getTitle().isEmpty()) throw new QuizException("Quiz title cannot be empty");
-        if (quiz.getQuestions().isEmpty()) throw new QuizException("Quiz must have at least one question");
+        if (quiz.getTitle().isEmpty() || quiz.getQuestions().isEmpty()) throw new QuizException("Quiz must have a title and at least one question");
         quizRepository.save(quiz);
         saveQuizzesToFile();
     }
@@ -48,7 +47,7 @@ public class QuizService {
                 quizRepository.saveAll(quizzes);
                 System.out.println("Loaded " + quizzes.size() + " quizzes from file");
             } else {
-                System.out.println("Failed to create quizzes file. Starting with empty quiz list.");
+                System.out.println("Failed to read quizzes file. Starting with an empty file.");
             }
         } catch (IOException e) {
             System.err.println("Error reading quizzes file: " + e.getMessage());

@@ -32,12 +32,7 @@ public class CreateFile {
         MultipleChoiceQuestion mcq1 = new MultipleChoiceQuestion(
                 "What is the main method signature in Java?",
                 5,
-                Arrays.asList(
-                        "public static void main(String[] args)",
-                        "public void main(String[] args)",
-                        "public static void main()",
-                        "void main(String args[])"
-                ),
+                Arrays.asList("public static void main(String[] args)", "public void main(String[] args)", "public static void main()", "void main(String args[])"),
                 0
         );
         TrueFalseQuestion tfq1 = new TrueFalseQuestion(
@@ -48,12 +43,7 @@ public class CreateFile {
         MultipleChoiceQuestion mcq2 = new MultipleChoiceQuestion(
                 "Which of the following is not a Java keyword?",
                 4,
-                Arrays.asList(
-                        "static",
-                        "finally",
-                        "super",
-                        "foreach"
-                ),
+                Arrays.asList("static", "finally", "super", "foreach"),
                 3
         );
         return new Quiz(
@@ -67,12 +57,7 @@ public class CreateFile {
         MultipleChoiceQuestion mcq3 = new MultipleChoiceQuestion(
                 "What is the capital of France?",
                 2,
-                Arrays.asList(
-                        "London",
-                        "Berlin",
-                        "Paris",
-                        "Madrid"
-                ),
+                Arrays.asList("London", "Berlin", "Paris", "Madrid"),
                 2
         );
         TrueFalseQuestion tfq2 = new TrueFalseQuestion(
@@ -83,12 +68,7 @@ public class CreateFile {
         MultipleChoiceQuestion mcq4 = new MultipleChoiceQuestion(
                 "Who wrote 'Romeo and Juliet'?",
                 3,
-                Arrays.asList(
-                        "Charles Dickens",
-                        "William Shakespeare",
-                        "Jane Austen",
-                        "Mark Twain"
-                ),
+                Arrays.asList("Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"),
                 1
         );
         return new Quiz(
