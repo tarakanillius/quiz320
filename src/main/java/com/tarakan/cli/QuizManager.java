@@ -1,10 +1,10 @@
 package com.tarakan.cli;
 
 import com.tarakan.exception.QuizException;
-import com.tarakan.model.Quiz;
 import com.tarakan.service.QuizService;
-import java.util.List;
+import com.tarakan.model.Quiz;
 import java.util.Scanner;
+import java.util.List;
 
 public class QuizManager {
     private final QuizService quizService;

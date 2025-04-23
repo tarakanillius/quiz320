@@ -32,10 +32,7 @@ public class QuizCreator {
         boolean addingQuestions = true;
 
         while (addingQuestions) {
-            System.out.println("\n===== Add a Question =====");
-            System.out.println("1. Multiple Choice Question");
-            System.out.println("2. True/False Question");
-            System.out.println("3. Finish adding questions");
+            System.out.println("\n===== Add a Question =====\n1. Multiple Choice Question\n2. True/False Question\n3. Finish adding questions");
             System.out.print("Enter your choice: ");
 
             int choice = inputHandler.getIntInput();

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 import java.io.File;
 
-public class CreateQuizzesFile {
+public class CreateFile {
     private static final String QUIZZES_FILE_PATH = "quizzes.json";
 
     public static void createQuizzesFile() {

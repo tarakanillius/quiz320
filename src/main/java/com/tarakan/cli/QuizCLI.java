@@ -25,12 +25,7 @@ public class QuizCLI {
     }
 
     private void displayMainMenu() {
-        System.out.println("\n===== Quiz Application =====");
-        System.out.println("1. Create a new quiz");
-        System.out.println("2. List all quizzes");
-        System.out.println("3. Take a quiz");
-        System.out.println("4. Delete a quiz");
-        System.out.println("5. Exit");
+        System.out.println("\n===== Quiz Application =====\n1. Create a new quiz\n2. List all quizzes\n3. Take a quiz\n4. Delete a quiz\n5. Exit");
         System.out.print("Enter your choice: ");
     }
 }

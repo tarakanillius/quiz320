@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tarakan.repository.QuizRepository;
-import com.tarakan.config.CreateQuizzesFile;
 import com.tarakan.exception.QuizException;
 import com.tarakan.model.Quiz;
 import java.io.IOException;
@@ -45,25 +44,14 @@ public class QuizService {
         try {
             File file = new File(QUIZZES_FILE_PATH);
             if (file.exists()) {
-                List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<>() {
-                });
+                List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<>() {});
                 quizRepository.saveAll(quizzes);
                 System.out.println("Loaded " + quizzes.size() + " quizzes from file");
             } else {
-                System.out.println("No quizzes file found. Creating sample quizzes...");
-                CreateQuizzesFile.createQuizzesFile();
-
-                if (file.exists()) {
-                    List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<>() {
-                    });
-                    quizRepository.saveAll(quizzes);
-                    System.out.println("Loaded " + quizzes.size() + " sample quizzes");
-                } else {
                     System.out.println("Failed to create quizzes file. Starting with empty quiz list.");
-                }
             }
         } catch (IOException e) {
-            System.err.println("Error loading quizzes from file: " + e.getMessage());
+            System.err.println("Error reading quizzes file: " + e.getMessage());
             e.printStackTrace();
         }
     }
