@@ -28,8 +28,7 @@ public class QuizManager {
 
         for (int i = 0; i < quizzes.size(); i++) {
             Quiz quiz = quizzes.get(i);
-            System.out.println((i + 1) + ". " + quiz.getTitle() + " - " + quiz.getDescription() +
-                    " (" + quiz.getQuestions().size() + " questions, " + quiz.getTimeLimit() + " minutes)");
+            System.out.println((i + 1) + ". " + quiz.getTitle() + " - " + quiz.getDescription() + " (" + quiz.getQuestions().size() + " questions)");
         }
     }
 

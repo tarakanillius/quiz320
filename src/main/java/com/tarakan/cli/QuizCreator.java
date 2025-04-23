@@ -20,11 +20,9 @@ public class QuizCreator {
         String title = scanner.nextLine();
         System.out.print("Enter quiz description: ");
         String description = scanner.nextLine();
-        System.out.print("Enter time limit (in minutes): ");
-        int timeLimit = inputHandler.getIntInput();
 
         List<Question> questions = createQuestions();
-        return new Quiz(title, description, questions, timeLimit);
+        return new Quiz(title, description, questions);
     }
 
     private List<Question> createQuestions() {

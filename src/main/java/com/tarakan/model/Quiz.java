@@ -8,16 +8,14 @@ public class Quiz {
     private String title;
     private String description;
     private List<Question> questions;
-    private int timeLimit;
 
     public Quiz() {}
 
-    public Quiz(String title, String description, List<Question> questions, int timeLimit) {
+    public Quiz(String title, String description, List<Question> questions) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
         this.description = description;
         this.questions = questions;
-        this.timeLimit = timeLimit;
     }
 
     public String getId() {
@@ -40,10 +38,6 @@ public class Quiz {
         return questions;
     }
 
-    public int getTimeLimit() {
-        return timeLimit;
-    }
-
     @Override
     public String toString() {
         return "Quiz{" +
@@ -51,7 +45,6 @@ public class Quiz {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", questions=" + questions +
-                ", timeLimit=" + timeLimit +
                 '}';
     }
 }

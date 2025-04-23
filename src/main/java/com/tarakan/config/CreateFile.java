@@ -66,8 +66,7 @@ public class CreateFile {
         return new Quiz(
                 "Java Programming Basics",
                 "Test your knowledge of Java programming fundamentals",
-                Arrays.asList(mcq1, tfq1, mcq2),
-                15
+                Arrays.asList(mcq1, tfq1, mcq2)
         );
     }
 
@@ -108,8 +107,7 @@ public class CreateFile {
         return new Quiz(
                 "General Knowledge",
                 "Test your general knowledge with these questions",
-                Arrays.asList(mcq3, tfq2, mcq4),
-                10
+                Arrays.asList(mcq3, tfq2, mcq4)
         );
     }
 
