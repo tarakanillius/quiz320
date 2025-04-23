@@ -1,6 +1,6 @@
 package com.tarakan.model;
 
-public interface Evaluatable {
+public interface QuestionEvaluator {
     boolean evaluate(Object response);
     int getPoints();
 }

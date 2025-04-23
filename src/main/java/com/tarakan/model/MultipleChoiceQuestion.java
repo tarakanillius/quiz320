@@ -2,7 +2,7 @@ package com.tarakan.model;
 
 import java.util.List;
 
-public class MultipleChoiceQuestion extends Question implements Evaluatable {
+public class MultipleChoiceQuestion extends Question implements QuestionEvaluator {
     private List<String> options;
     private int correctOptionIndex;
 

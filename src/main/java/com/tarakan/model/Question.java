@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = TrueFalseQuestion.class, name = "TrueFalseQuestion")
 })
 
-public abstract class Question implements Evaluatable {
+public abstract class Question implements QuestionEvaluator {
     protected String text;
     protected int points;
 
