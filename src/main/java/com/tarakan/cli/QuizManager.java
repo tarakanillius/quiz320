@@ -40,7 +40,6 @@ public class QuizManager {
             return null;
         }
 
-        listQuizzes();
         System.out.print("Enter the number of the quiz you want to " + action + ": ");
         int quizIndex = inputHandler.getIntInput() - 1;
 

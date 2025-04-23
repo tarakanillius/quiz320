@@ -10,20 +10,13 @@ public class TrueFalseQuestion extends Question {
         this.correctAnswer = correctAnswer;
     }
 
-    @Override
-    public boolean evaluate(Object response) {
-        if (!(response instanceof Boolean)) return false;
-        return ((Boolean) response) == correctAnswer;
-    }
-
     public boolean isCorrectAnswer() {
         return correctAnswer;
     }
 
     @Override
-    public String toString() {
-        return "TrueFalseQuestion{" +
-                "correctAnswer=" + correctAnswer +
-                "} " + super.toString();
+    public boolean evaluate(Object response) {
+        if (!(response instanceof Boolean)) return false;
+        return ((Boolean) response) == correctAnswer;
     }
 }

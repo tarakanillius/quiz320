@@ -29,10 +29,4 @@ public class MultipleChoiceQuestion extends Question implements Evaluatable {
         }
         return ((Integer) response) == correctOptionIndex;
     }
-
-    @Override
-    public int getPoints() {
-        return points;
-    }
-
 }

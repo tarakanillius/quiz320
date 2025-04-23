@@ -37,14 +37,4 @@ public class Quiz {
     public List<Question> getQuestions() {
         return questions;
     }
-
-    @Override
-    public String toString() {
-        return "Quiz{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", questions=" + questions +
-                '}';
-    }
 }

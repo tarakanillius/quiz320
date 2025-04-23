@@ -23,8 +23,8 @@ public class QuizService {
     }
 
     public void createQuiz(Quiz quiz) throws QuizException {
-        if (quiz.getTitle() == null || quiz.getTitle().isEmpty()) throw new QuizException("Quiz title cannot be empty");
-        if (quiz.getQuestions() == null || quiz.getQuestions().isEmpty()) throw new QuizException("Quiz must have at least one question");
+        if (quiz.getTitle().isEmpty()) throw new QuizException("Quiz title cannot be empty");
+        if (quiz.getQuestions().isEmpty()) throw new QuizException("Quiz must have at least one question");
         quizRepository.save(quiz);
         saveQuizzesToFile();
     }

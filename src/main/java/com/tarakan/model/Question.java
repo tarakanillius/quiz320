@@ -28,22 +28,12 @@ public abstract class Question implements Evaluatable {
         return text;
     }
 
-
-    @Override
-    public int getPoints() {
-        return points;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
 
     @Override
-    public String toString() {
-        return "Question{" +
-                "id='" + id + '\'' +
-                ", text='" + text + '\'' +
-                ", points=" + points +
-                '}';
+    public int getPoints() {
+        return points;
     }
 }
