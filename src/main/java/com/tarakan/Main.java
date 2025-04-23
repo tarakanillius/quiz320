@@ -2,7 +2,7 @@ package com.tarakan;
 
 import com.tarakan.repository.QuizRepository;
 import com.tarakan.service.QuizService;
-import com.tarakan.config.CreateFile;
+import com.tarakan.config.QuizDataInitializer;
 import com.tarakan.cli.CliApplication;
 import java.io.File;
 
@@ -11,7 +11,7 @@ public class Main {
         File file = new File("quizzes.json");
         if (!file.exists()) {
             System.out.println("No quizzes file found. Creating sample quizzes...");
-            CreateFile.createQuizzesFile();
+            QuizDataInitializer.createQuizzesFile();
         }
 
         QuizRepository quizRepository = new QuizRepository();

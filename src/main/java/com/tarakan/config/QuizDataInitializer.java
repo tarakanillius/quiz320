@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.io.File;
 
-public class CreateFile {
+public class QuizDataInitializer {
     private static final String QUIZZES_FILE_PATH = "quizzes.json";
 
     public static void createQuizzesFile() {
