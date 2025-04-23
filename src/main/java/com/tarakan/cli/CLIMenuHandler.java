@@ -5,17 +5,17 @@ import com.tarakan.service.QuizService;
 import com.tarakan.model.*;
 import java.util.Scanner;
 
-public class CLIMenuHandler {
+public class CliMenuHandler {
     private final QuizService quizService;
-    private final QuizCreator quizCreator;
-    private final QuizTaker quizTaker;
-    private final QuizManager quizManager;
+    private final CliQuizCreator quizCreator;
+    private final CliQuizTaker quizTaker;
+    private final CliQuizManager quizManager;
 
-    public CLIMenuHandler(QuizService quizService, Scanner scanner) {
+    public CliMenuHandler(QuizService quizService, Scanner scanner) {
         this.quizService = quizService;
-        this.quizCreator = new QuizCreator(scanner);
-        this.quizTaker = new QuizTaker(scanner);
-        this.quizManager = new QuizManager(quizService, scanner);
+        this.quizCreator = new CliQuizCreator(scanner);
+        this.quizTaker = new CliQuizTaker(scanner);
+        this.quizManager = new CliQuizManager(quizService, scanner);
     }
 
     public boolean handleMainMenuChoice(int choice) {
