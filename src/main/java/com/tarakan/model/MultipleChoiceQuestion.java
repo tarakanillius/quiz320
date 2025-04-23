@@ -41,7 +41,7 @@ public class MultipleChoiceQuestion extends Question implements QuestionEvaluato
     public MultipleChoiceQuestion(String text, int points, List<String> options, int correctOptionIndex) {
         super(text, points);
         this.options = options;
-        this.correctOptionIndex = correctOptionIndex+1;
+        this.correctOptionIndex = correctOptionIndex;
     }
     /**
      * Gets the list of options for this multiple-choice question.
