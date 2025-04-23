@@ -14,7 +14,7 @@ import java.io.File;
 public class QuizService {
     private final QuizRepository quizRepository;
     private final ObjectMapper objectMapper;
-    private final String QUIZZES_FILE_PATH = "src/main/resources/quizzes.json";
+    private final String QUIZZES_FILE_PATH = "quizzes.json";
 
     public QuizService(QuizRepository quizRepository) {
         this.quizRepository = quizRepository;

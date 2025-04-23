@@ -12,7 +12,7 @@ import java.util.UUID;
 import java.io.File;
 
 public class CreateQuizzesFile {
-    private static final String QUIZZES_FILE_PATH = "src/main/resources/quizzes.json";
+    private static final String QUIZZES_FILE_PATH = "quizzes.json";
 
     public static void createQuizzesFile() {
         try {
@@ -21,7 +21,6 @@ public class CreateQuizzesFile {
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
             File file = new File(QUIZZES_FILE_PATH);
-            file.getParentFile().mkdirs();
             objectMapper.writeValue(file, quizzes);
 
             System.out.println("Successfully created quizzes.json with " + quizzes.size() + " sample quizzes");
