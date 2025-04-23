@@ -16,8 +16,6 @@ public class QuizTaker {
     public void takeQuiz(Quiz quiz) {
         System.out.println("\n===== Taking Quiz: " + quiz.getTitle() + " =====");
         System.out.println("Description: " + quiz.getDescription());
-        System.out.println("Press Enter to start...");
-        scanner.nextLine();
 
         int totalPoints = 0, earnedPoints = 0;
         List<Question> questions = quiz.getQuestions();

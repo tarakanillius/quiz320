@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class QuizRepository {
     private final Map<String, Quiz> quizzes;
@@ -15,7 +14,6 @@ public class QuizRepository {
     }
 
     public void save(Quiz quiz) {
-        if (quiz.getId() == null) quiz.setId(UUID.randomUUID().toString());
         quizzes.put(quiz.getId(), quiz);
     }
 

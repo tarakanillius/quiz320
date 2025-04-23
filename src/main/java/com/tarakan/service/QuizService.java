@@ -44,11 +44,11 @@ public class QuizService {
         try {
             File file = new File(QUIZZES_FILE_PATH);
             if (file.exists()) {
-                List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<>() {});
+                List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<List<Quiz>>() {});
                 quizRepository.saveAll(quizzes);
                 System.out.println("Loaded " + quizzes.size() + " quizzes from file");
             } else {
-                    System.out.println("Failed to create quizzes file. Starting with empty quiz list.");
+                System.out.println("Failed to create quizzes file. Starting with empty quiz list.");
             }
         } catch (IOException e) {
             System.err.println("Error reading quizzes file: " + e.getMessage());

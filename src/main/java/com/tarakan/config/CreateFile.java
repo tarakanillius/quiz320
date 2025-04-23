@@ -8,7 +8,6 @@ import com.tarakan.model.Quiz;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import java.io.File;
 
 public class CreateFile {
@@ -41,15 +40,11 @@ public class CreateFile {
                 ),
                 0
         );
-        mcq1.setId(UUID.randomUUID().toString());
-
         TrueFalseQuestion tfq1 = new TrueFalseQuestion(
                 "Java is a purely object-oriented language.",
                 3,
                 false
         );
-        tfq1.setId(UUID.randomUUID().toString());
-
         MultipleChoiceQuestion mcq2 = new MultipleChoiceQuestion(
                 "Which of the following is not a Java keyword?",
                 4,
@@ -61,8 +56,6 @@ public class CreateFile {
                 ),
                 3
         );
-        mcq2.setId(UUID.randomUUID().toString());
-
         return new Quiz(
                 "Java Programming Basics",
                 "Test your knowledge of Java programming fundamentals",
@@ -82,15 +75,11 @@ public class CreateFile {
                 ),
                 2
         );
-        mcq3.setId(UUID.randomUUID().toString());
-
         TrueFalseQuestion tfq2 = new TrueFalseQuestion(
                 "The Great Wall of China is visible from space.",
                 2,
                 false
         );
-        tfq2.setId(UUID.randomUUID().toString());
-
         MultipleChoiceQuestion mcq4 = new MultipleChoiceQuestion(
                 "Who wrote 'Romeo and Juliet'?",
                 3,
@@ -102,16 +91,10 @@ public class CreateFile {
                 ),
                 1
         );
-        mcq4.setId(UUID.randomUUID().toString());
-
         return new Quiz(
                 "General Knowledge",
                 "Test your general knowledge with these questions",
                 Arrays.asList(mcq3, tfq2, mcq4)
         );
-    }
-
-    public static void main(String[] args) {
-        createQuizzesFile();
     }
 }
