@@ -67,6 +67,7 @@ public class MultipleChoiceQuestion extends Question implements QuestionEvaluato
         if (!(response instanceof Integer)) {
             return false;
         }
+
         return ((Integer) response) == correctOptionIndex;
     }
 }

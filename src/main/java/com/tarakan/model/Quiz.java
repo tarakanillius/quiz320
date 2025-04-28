@@ -34,7 +34,6 @@ public class Quiz {
      * </p>
      */
     public Quiz() {}
-
     /**
      * Constructs a new Quiz.
      * <p>
@@ -46,9 +45,9 @@ public class Quiz {
      */
     public Quiz(String title, String description, List<Question> questions) {
         this.id = UUID.randomUUID().toString();
-        this.title = title;
         this.description = description;
         this.questions = questions;
+        this.title = title;
     }
     /**
      * Gets the unique identifier for the quiz.

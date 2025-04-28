@@ -37,11 +37,13 @@ public class CliApplication {
      */
     public void start() {
         boolean running = true;
+
         while (running) {
             displayMainMenu();
             int choice = inputHandler.getIntInput();
             running = menuHandler.handleMainMenuChoice(choice);
         }
+
         inputHandler.close();
         System.out.println("Thank you for using the Quiz Application!");
     }

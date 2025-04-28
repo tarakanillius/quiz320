@@ -60,7 +60,6 @@ public abstract class Question implements QuestionEvaluator {
     public String getText() {
         return text;
     }
-
     /**
      * Gets the number of points awarded for answering the question correctly.
      * @return The number of points awarded for answering the question correctly.

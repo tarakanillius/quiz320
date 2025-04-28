@@ -23,7 +23,6 @@ public class Main {
             System.out.println("No quizzes file found. Creating sample quizzes...");
             QuizDataInitializer.createQuizzesFile();
         }
-
         QuizRepository quizRepository = new QuizRepository();
         QuizService quizService = new QuizService(quizRepository);
         CliApplication cli = new CliApplication(quizService);

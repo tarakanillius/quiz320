@@ -36,10 +36,10 @@ public class CliMenuHandler {
      * @param inputHandler The input handler for handling user input in the CLI.
      */
     public CliMenuHandler(QuizService quizService, CliInputHandler inputHandler) {
-        this.quizService = quizService;
+        this.quizManager = new CliQuizManager(quizService, inputHandler);
         this.quizCreator = new CliQuizCreator(inputHandler);
         this.quizTaker = new CliQuizTaker(inputHandler);
-        this.quizManager = new CliQuizManager(quizService, inputHandler);
+        this.quizService = quizService;
     }
     /**
      * Handles the main menu choice and delegates to the appropriate method.
@@ -70,6 +70,7 @@ public class CliMenuHandler {
      */
     private void createQuiz() {
         Quiz quiz = quizCreator.createQuiz();
+
         try {
             quizService.createQuiz(quiz);
             System.out.println("Quiz created successfully!");
@@ -94,6 +95,7 @@ public class CliMenuHandler {
      */
     private void takeQuiz() {
         Quiz quiz = quizManager.selectQuiz("take");
+
         if (quiz != null) {
             quizTaker.takeQuiz(quiz);
         }

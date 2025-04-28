@@ -52,6 +52,7 @@ public class TrueFalseQuestion extends Question {
     @Override
     public boolean evaluate(Object response) {
         if (!(response instanceof Boolean)) return false;
+
         return ((Boolean) response) == correctAnswer;
     }
 }

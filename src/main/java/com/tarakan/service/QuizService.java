@@ -42,6 +42,7 @@ public class QuizService {
     public QuizService(QuizRepository quizRepository) {
         this.quizRepository = quizRepository;
         this.objectMapper = new ObjectMapper();
+
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         loadQuizzesFromFile();
     }
@@ -56,6 +57,7 @@ public class QuizService {
      */
     public void createQuiz(Quiz quiz) throws QuizException {
         if (quiz.getTitle().isEmpty() || quiz.getQuestions().isEmpty()) throw new QuizException("Quiz must have a title and at least one question");
+
         quizRepository.save(quiz);
         saveQuizzesToFile();
     }
@@ -76,6 +78,7 @@ public class QuizService {
     public void deleteQuiz(String id) throws QuizException {
         Quiz quiz = quizRepository.findById(id);
         if (quiz == null) throw new QuizException("Quiz not found with id: " + id);
+
         quizRepository.delete(id);
         saveQuizzesToFile();
     }
@@ -89,8 +92,9 @@ public class QuizService {
     private void loadQuizzesFromFile() {
         try {
             File file = new File(QUIZZES_FILE_PATH);
+
             if (file.exists()) {
-                List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<List<Quiz>>() {});
+                List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<>(){});
                 quizRepository.saveAll(quizzes);
                 System.out.println("Loaded " + quizzes.size() + " quizzes from file");
             } else {
