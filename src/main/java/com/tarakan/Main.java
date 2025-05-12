@@ -9,6 +9,7 @@ import java.io.File;
  * Main class to start the Quiz Application.
  */
 public class Main {
+    private static final String QUIZZES_FILE_PATH = "quizzes.json";
     /**
      * Main method to start the Quiz Application.
      * <p>
@@ -18,13 +19,13 @@ public class Main {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        File file = new File("quizzes.json");
+        File file = new File(QUIZZES_FILE_PATH);
         if (!file.exists()) {
             System.out.println("No quizzes file found. Creating sample quizzes...");
-            QuizDataInitializer.createQuizzesFile();
+            QuizDataInitializer.createQuizzesFile(QUIZZES_FILE_PATH);
         }
         QuizRepository quizRepository = new QuizRepository();
-        QuizService quizService = new QuizService(quizRepository);
+        QuizService quizService = new QuizService(quizRepository, QUIZZES_FILE_PATH);
         CliApplication cli = new CliApplication(quizService);
         cli.start();
     }

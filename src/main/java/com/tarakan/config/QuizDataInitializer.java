@@ -22,23 +22,19 @@ import java.io.File;
  */
 public class QuizDataInitializer {
     /**
-     * Path to the file where quizzes will be saved.
-     */
-    private static final String QUIZZES_FILE_PATH = "quizzes.json";
-    /**
      * Creates sample quizzes and saves them to a JSON file.
      * <p>
      * This method creates two sample quizzes: one for Java and one for general knowledge.
      * Each quiz contains multiple-choice and true/false questions.
      * </p>
+     * @param path the path to the file where quizzes will be saved
      */
-    public static void createQuizzesFile() {
+    public static void createQuizzesFile(String path) {
         try {
             List<Quiz> quizzes = Arrays.asList(createJavaQuiz(), createGeneralKnowledgeQuiz());
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
-            File file = new File(QUIZZES_FILE_PATH);
+            File file = new File(path);
             objectMapper.writeValue(file, quizzes);
 
             System.out.println("Successfully created quizzes.json with " + quizzes.size() + " sample quizzes");

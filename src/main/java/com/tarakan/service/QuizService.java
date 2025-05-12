@@ -30,7 +30,7 @@ public class QuizService {
     /**
      * Path to the file where quizzes are persisted.
      */
-    private final String QUIZZES_FILE_PATH = "quizzes.json";
+    private final String QUIZZES_FILE_PATH;
     /**
      * Constructs a new QuizService with the specified repository.
      * <p>
@@ -39,9 +39,10 @@ public class QuizService {
      *
      * @param quizRepository the repository used for quiz data operations
      */
-    public QuizService(QuizRepository quizRepository) {
+    public QuizService(QuizRepository quizRepository, String path) {
         this.quizRepository = quizRepository;
         this.objectMapper = new ObjectMapper();
+        this.QUIZZES_FILE_PATH = path;
 
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         loadQuizzesFromFile();
