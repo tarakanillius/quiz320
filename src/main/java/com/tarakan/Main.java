@@ -5,7 +5,6 @@ import com.tarakan.repository.QuizRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 import com.tarakan.service.QuizService;
 import com.tarakan.cli.CliApplication;
-
 import java.io.File;
 /**
  * Main class to start the Quiz Application.

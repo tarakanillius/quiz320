@@ -1,9 +1,8 @@
 package com.tarakan.exception;
 /**
- * Exception class for handling quiz-related errors.
+ * Exception class for quiz-related exceptions.
  * <p>
- * This class extends the built-in Exception class and provides a constructor
- * to create a new QuizException with a custom error message.
+ *     This class extends the RuntimeException class and provides a constructor that takes an error message as a parameter.
  * </p>
  */
 public class QuizException extends RuntimeException {

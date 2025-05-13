@@ -34,7 +34,6 @@ public class QuizRepository {
      */
     public void save(Quiz... quizzesToSave) {
         if (quizzesToSave == null) throw new QuizException("Quiz array is null");
-        if (quizzesToSave.length == 0) throw new QuizException("Quiz array is empty");
 
         for (Quiz quiz : quizzesToSave) {
             if (quiz == null) throw new QuizException("Quiz element is null");

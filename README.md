@@ -14,6 +14,11 @@ The application supports two types of questions:
 ### Prerequisites
 - Java
 - Maven (for building the project)
+### Environment Setup
+Create a `.env` file in the project root with the following content:
+```
+QUIZZES_FILE_PATH=quizzes.json
+```
 ### Running the Application
 1. Build the project using Maven:
    ```

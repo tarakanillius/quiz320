@@ -18,7 +18,6 @@ public class QuizRepositoryTest {
     @Test
     public void testSave() {
         QuizRepository quizRepository = new QuizRepository();
-        assertThrows(QuizException.class, quizRepository::save);
         assertThrows(QuizException.class, () -> quizRepository.save(null));
     }
 
@@ -71,6 +70,5 @@ public class QuizRepositoryTest {
     public void testSaveAll(){
         QuizRepository quizRepository = new QuizRepository();
         assertThrows(QuizException.class, () -> quizRepository.saveAll(null));
-        assertThrows(QuizException.class, () -> quizRepository.saveAll(List.of()));
     }
 }

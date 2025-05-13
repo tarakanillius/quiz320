@@ -1,7 +1,6 @@
 package com.tarakan.model;
 
 import com.tarakan.exception.QuizException;
-
 /**
  * Represents a true/false question in a quiz.
  * <p>
