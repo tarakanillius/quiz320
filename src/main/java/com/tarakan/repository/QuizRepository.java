@@ -1,5 +1,6 @@
 package com.tarakan.repository;
 
+import com.tarakan.exception.QuizException;
 import com.tarakan.model.Quiz;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +30,19 @@ public class QuizRepository {
      * <p>
      * If a quiz with the same ID already exists, it will be overwritten.
      * </p>
-     * @param quiz the quiz to be saved
+     * @param quizzesToSave the quizzes to save
      */
-    public void save(Quiz quiz) {
-        quizzes.put(quiz.getId(), quiz);
+    public void save(Quiz... quizzesToSave) {
+        if (quizzesToSave == null) throw new QuizException("Quiz array is null");
+        if (quizzesToSave.length == 0) throw new QuizException("Quiz array is empty");
+
+        for (Quiz quiz : quizzesToSave) {
+            if (quiz == null) throw new QuizException("Quiz element is null");
+
+            if (quiz.getTitle() == null || quiz.getTitle().isBlank() || quiz.getDescription() == null || quiz.getDescription().isBlank()) throw new QuizException("Quiz title and description cannot be blank or null");
+
+            quizzes.put(quiz.getId(), quiz);
+        }
     }
     /**
      * Retrieves a quiz by its ID.
@@ -43,6 +53,8 @@ public class QuizRepository {
      * @return the quiz with the given ID, or null if not found
      */
     public Quiz findById(String id) {
+        if (id == null) throw new QuizException("Quiz ID is null");
+
         return quizzes.get(id);
     }
     /**
@@ -53,6 +65,8 @@ public class QuizRepository {
      * @return a list of all quizzes
      */
     public List<Quiz> findAll() {
+        if (quizzes.isEmpty()) return new ArrayList<>();
+
         return new ArrayList<>(quizzes.values());
     }
     /**
@@ -63,17 +77,21 @@ public class QuizRepository {
      * @param id quiz ID to delete
      */
     public void delete(String id) {
+        if (id == null) throw new QuizException("Quiz ID is null");
+
         quizzes.remove(id);
     }
     /**
      * Saves a list of quizzes.
      * <p>
      * This method is used to save a list of quizzes to the repository.
-     * It iterates over the list and calls the save method for each quiz.
+     * It calls the save method with the array of quizzes.
      * </p>
      * @param quizList the list of quizzes to be saved
      */
     public void saveAll(List<Quiz> quizList) {
-        for (Quiz quiz : quizList) save(quiz);
+        if (quizList == null) throw new QuizException("Quiz list is null");
+
+        save(quizList.toArray(new Quiz[0]));
     }
 }

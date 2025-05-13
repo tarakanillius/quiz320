@@ -35,17 +35,18 @@ public class CliQuizTaker {
      * @param quiz The quiz to be taken.
      */
     public void takeQuiz(Quiz quiz) {
-        System.out.println("\n===== Taking Quiz: " + quiz.getTitle() + " =====");
-        System.out.println("Description: " + quiz.getDescription());
+        List<Question> questions = quiz.getQuestions();
+
+        System.out.print("\n===== Taking Quiz: " + quiz.getTitle() + " =====");
 
         int totalPoints = 0, earnedPoints = 0;
-        List<Question> questions = quiz.getQuestions();
 
         for (int i = 0; i < questions.size(); i++) {
             Question question = questions.get(i);
             totalPoints += question.getPoints();
 
             System.out.println("\nQuestion " + (i + 1) + ": " + question.getText());
+
             if (question instanceof MultipleChoiceQuestion) {
                 earnedPoints += handleMCQ((MultipleChoiceQuestion) question);
             } else if (question instanceof TrueFalseQuestion) {
@@ -67,20 +68,20 @@ public class CliQuizTaker {
      */
     private int handleMCQ(MultipleChoiceQuestion mcq) {
         List<String> options = mcq.getOptions();
+
         for (int j = 0; j < options.size(); j++) {
             System.out.println((j + 1) + ". " + options.get(j));
         }
 
-        System.out.print("Your answer (1-" + options.size() + "): ");
-        int answer = inputHandler.getIntInput() - 1;
+        int answer = inputHandler.promptBoundedInt("Your answer (1-" + options.size() + "): ", 1, options.size()) - 1;
 
         if (mcq.evaluate(answer)) {
             System.out.println("Correct!");
             return mcq.getPoints();
-        } else {
-            System.out.println("Incorrect. The correct answer was: " + (mcq.getCorrectOptionIndex()));
-            return 0;
         }
+
+        System.out.println("Incorrect. The correct answer was: " + (mcq.getCorrectOptionIndex()));
+        return 0;
     }
     /**
      * Method to handle a true/false question in the CLI.
@@ -99,10 +100,10 @@ public class CliQuizTaker {
         if (tfq.evaluate(answer)) {
             System.out.println("Correct!");
             return tfq.getPoints();
-        } else {
-            System.out.println("Incorrect. The correct answer was: " + tfq.isCorrectAnswer());
-            return 0;
         }
+
+        System.out.println("Incorrect. The correct answer was: " + tfq.isCorrectAnswer());
+        return 0;
     }
     /**
      * Method to display the results of a quiz.
@@ -116,6 +117,7 @@ public class CliQuizTaker {
      */
     private void displayResults(int earnedPoints, int totalPoints) {
         int percentage = totalPoints > 0 ? (earnedPoints * 100 / totalPoints) : 0;
+
         System.out.println("\n===== Quiz Complete =====\nYour score: " + earnedPoints + " out of " + totalPoints+"\nPercentage: " + percentage + "%");
     }
 }

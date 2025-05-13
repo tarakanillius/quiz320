@@ -40,6 +40,8 @@ public class QuizService {
      * @param quizRepository the repository used for quiz data operations
      */
     public QuizService(QuizRepository quizRepository, String path) {
+        if (path == null || path.isEmpty() || path.trim().isBlank()) throw new IllegalArgumentException("Path cannot be null or empty");
+
         this.quizRepository = quizRepository;
         this.objectMapper = new ObjectMapper();
         this.QUIZZES_FILE_PATH = path;
@@ -56,10 +58,9 @@ public class QuizService {
      * @param quiz the quiz to be created
      * @throws QuizException if the quiz is invalid (missing title or questions)
      */
-    public void createQuiz(Quiz quiz) throws QuizException {
-        if (quiz.getTitle().isEmpty() || quiz.getQuestions().isEmpty()) throw new QuizException("Quiz must have a title and at least one question");
-
+    public void createQuiz(Quiz quiz) {
         quizRepository.save(quiz);
+
         saveQuizzesToFile();
     }
     /**
@@ -76,11 +77,13 @@ public class QuizService {
      * @param id the ID of the quiz to delete
      * @throws QuizException if no quiz with the specified ID exists
      */
-    public void deleteQuiz(String id) throws QuizException {
+    public void deleteQuiz(String id) {
         Quiz quiz = quizRepository.findById(id);
+
         if (quiz == null) throw new QuizException("Quiz not found with id: " + id);
 
         quizRepository.delete(id);
+
         saveQuizzesToFile();
     }
     /**
@@ -96,14 +99,16 @@ public class QuizService {
 
             if (file.exists()) {
                 List<Quiz> quizzes = objectMapper.readValue(file, new TypeReference<>(){});
+
                 quizRepository.saveAll(quizzes);
+
                 System.out.println("Loaded " + quizzes.size() + " quizzes from file");
-            } else {
-                System.out.println("Failed to read quizzes file. Starting with an empty file.");
+                return;
             }
+
+            System.out.println("Failed to read quizzes file. Starting with an empty file.");
         } catch (IOException e) {
             System.err.println("Error reading quizzes file: " + e.getMessage());
-            e.printStackTrace();
         }
     }
     /**
@@ -115,7 +120,9 @@ public class QuizService {
     private void saveQuizzesToFile() {
         try {
             List<Quiz> quizzes = quizRepository.findAll();
+
             objectMapper.writeValue(new File(QUIZZES_FILE_PATH), quizzes);
+
             System.out.println("Saved " + quizzes.size() + " quizzes to file");
         } catch (IOException e) {
             System.err.println("Error saving quizzes to file: " + e.getMessage());

@@ -39,12 +39,17 @@ public class CliQuizCreator {
      */
     public Quiz createQuiz() {
         System.out.println("\n===== Create a New Quiz =====");
-        System.out.print("Enter quiz title: ");
-        String title = inputHandler.getStringInput();
-        System.out.print("Enter quiz description: ");
-        String description = inputHandler.getStringInput();
+
+        String title = inputHandler.promptNonEmptyString("Enter quiz title: ");
+        String description = inputHandler.promptNonEmptyString("Enter quiz description: ");
 
         List<Question> questions = createQuestions();
+
+        if (questions == null || questions.isEmpty()) {
+            System.out.println("No valid questions added. Quiz creation cancelled.");
+            return null;
+        }
+
         return new Quiz(title, description, questions);
     }
     /**
@@ -57,20 +62,22 @@ public class CliQuizCreator {
      */
     private List<Question> createQuestions() {
         List<Question> questions = new ArrayList<>();
-        boolean addingQuestions = true;
 
-        while (addingQuestions) {
+        while (true) {
             System.out.println("\n===== Add a Question =====\n1. Multiple Choice Question\n2. True/False Question\n3. Finish adding questions");
-            System.out.print("Enter your choice: ");
 
-            int choice = inputHandler.getIntInput();
+            int choice = inputHandler.promptPositiveInt("Enter your choice: ");
             if (choice == 1) questions.add(createMultipleChoiceQuestion());
             else if (choice == 2) questions.add(createTrueFalseQuestion());
-            else if (choice == 3) addingQuestions = false;
+            else if (choice == 3) break;
             else System.out.println("Invalid choice. Please try again.");
         }
 
-        return questions;
+        if(!questions.isEmpty()) return questions;
+
+        System.out.println("No questions added. Quiz creation cancelled.");
+
+        return null;
     }
     /**
      * Method to create a multiple-choice question.
@@ -83,23 +90,19 @@ public class CliQuizCreator {
      * @return The created multiple-choice question as a MultipleChoiceQuestion object.
      */
     private MultipleChoiceQuestion createMultipleChoiceQuestion() {
-        System.out.print("Enter question text: ");
-        String text = inputHandler.getStringInput();
-        System.out.print("Enter points for this question: ");
-        int points = inputHandler.getIntInput();
-
+        String text = inputHandler.promptNonEmptyString("Enter question text: ");
+        int points = inputHandler.promptPositiveInt("Enter points for this question: ");
         List<String> options = new ArrayList<>();
+
         System.out.println("Enter options (enter 'done' when finished):");
 
         while (true) {
-            System.out.print("Option " + (options.size() + 1) + ": ");
-            String option = inputHandler.getStringInput();
+            String option = inputHandler.promptNonEmptyString("Option " + (options.size() + 1) + ": ");
             if (option.equalsIgnoreCase("done")) break;
             options.add(option);
         }
 
-        System.out.print("Enter the index of the correct option (1-" + options.size() + "): ");
-        int correctIndex = inputHandler.getIntInput() - 1;
+        int correctIndex = inputHandler.promptBoundedInt("Enter the index of the correct option (1-" + options.size() + "): ", 1, options.size()) - 1;
 
         return new MultipleChoiceQuestion(text, points, options, correctIndex);
     }
@@ -113,10 +116,9 @@ public class CliQuizCreator {
      * @return The created true/false question as a TrueFalseQuestion object.
      */
     private TrueFalseQuestion createTrueFalseQuestion() {
-        System.out.print("Enter question text: ");
-        String text = inputHandler.getStringInput();
-        System.out.print("Enter points for this question: ");
-        int points = inputHandler.getIntInput();
+        String text = inputHandler.promptNonEmptyString("Enter question text: ");
+        int points = inputHandler.promptPositiveInt("Enter points for this question: ");
+
         System.out.print("Is the answer true? (yes/no): ");
         boolean correctAnswer = inputHandler.getBooleanInput("yes");
 

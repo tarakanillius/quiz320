@@ -1,5 +1,6 @@
 package com.tarakan.model;
 
+import com.tarakan.exception.QuizException;
 import java.util.List;
 import java.util.UUID;
 /**
@@ -44,6 +45,9 @@ public class Quiz {
      * @param questions The list of questions in the quiz.
      */
     public Quiz(String title, String description, List<Question> questions) {
+        if (title == null || title.isEmpty()) throw new QuizException("Title cannot be empty");
+        if (description == null || description.isEmpty()) throw new QuizException("Description cannot be empty");
+        if (questions == null || questions.isEmpty()) throw new QuizException("Quiz must have at least one question");
         this.id = UUID.randomUUID().toString();
         this.description = description;
         this.questions = questions;
@@ -75,6 +79,8 @@ public class Quiz {
      * @return The list of questions in the quiz.
      */
     public List<Question> getQuestions() {
+        if (questions == null || questions.isEmpty()) throw new QuizException("The quiz has no questions");
+
         return questions;
     }
 }

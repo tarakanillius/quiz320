@@ -50,6 +50,8 @@ public abstract class Question implements QuestionEvaluator {
      * @param points  The number of points awarded for answering the question correctly.
      */
     public Question(String text, int points) {
+        if (points < 1) throw new IllegalArgumentException("Points should be greater than 0");
+        if (text == null || text.isEmpty()) throw new IllegalArgumentException("Text cannot be null or empty");
         this.text = text;
         this.points = points;
     }

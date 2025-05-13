@@ -40,11 +40,14 @@ public class CliApplication {
 
         while (running) {
             displayMainMenu();
-            int choice = inputHandler.getIntInput();
+
+            int choice = inputHandler.promptPositiveInt("Please enter your choice: ");
+
             running = menuHandler.handleMainMenuChoice(choice);
         }
 
         inputHandler.close();
+
         System.out.println("Thank you for using the Quiz Application!");
     }
     /**
@@ -52,6 +55,5 @@ public class CliApplication {
      */
     private void displayMainMenu() {
         System.out.println("\n===== Quiz Application =====\n1. Create a new quiz\n2. List all quizzes\n3. Take a quiz\n4. Delete a quiz\n5. Exit");
-        System.out.print("Enter your choice: ");
     }
 }

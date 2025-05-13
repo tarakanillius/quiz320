@@ -6,7 +6,7 @@ package com.tarakan.exception;
  * to create a new QuizException with a custom error message.
  * </p>
  */
-public class QuizException extends Exception {
+public class QuizException extends RuntimeException {
     /**
      * Constructs a new QuizException with the specified error message.
      * @param message the error message

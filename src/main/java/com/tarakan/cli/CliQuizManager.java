@@ -1,6 +1,5 @@
 package com.tarakan.cli;
 
-import com.tarakan.exception.QuizException;
 import com.tarakan.service.QuizService;
 import com.tarakan.model.Quiz;
 import java.util.List;
@@ -40,7 +39,6 @@ public class CliQuizManager {
      * </p>
      */
     public void listQuizzes() {
-        System.out.println("\n===== Available Quizzes =====");
         List<Quiz> quizzes = quizService.getAllQuizzes();
 
         if (quizzes.isEmpty()) {
@@ -48,10 +46,13 @@ public class CliQuizManager {
             return;
         }
 
+        System.out.println("\n===== Available Quizzes =====");
+
         for (int i = 0; i < quizzes.size(); i++) {
             Quiz quiz = quizzes.get(i);
             System.out.println((i + 1) + ". " + quiz.getTitle() + " - " + quiz.getDescription() + " (" + quiz.getQuestions().size() + " questions)");
         }
+
     }
     /**
      * Method to select a quiz for taking or deleting.
@@ -72,11 +73,11 @@ public class CliQuizManager {
             return null;
         }
 
-        System.out.print("Enter the number of the quiz you want to " + action + ": ");
-        int quizIndex = inputHandler.getIntInput() - 1;
+        int quizIndex = inputHandler.promptPositiveInt("Enter the number of the quiz you want to " + action + ": ") - 1;
 
-        if (quizIndex < 0 || quizIndex >= quizzes.size()) {
+        if (quizIndex < 0 || quizIndex > quizzes.size()+1) {
             System.out.println("Invalid quiz number.");
+
             return null;
         }
 
@@ -93,18 +94,19 @@ public class CliQuizManager {
      */
     public void deleteQuiz() {
         Quiz quiz = selectQuiz("delete");
+
         if (quiz == null) return;
 
         System.out.print("Are you sure you want to delete '" + quiz.getTitle() + "'? (yes/no): ");
+
         if (inputHandler.getBooleanInput("yes")) {
-            try {
-                quizService.deleteQuiz(quiz.getId());
-                System.out.println("Quiz deleted successfully!");
-            } catch (QuizException e) {
-                System.out.println("Error deleting quiz: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Deletion cancelled.");
+            quizService.deleteQuiz(quiz.getId());
+
+            System.out.println("Quiz deleted successfully!");
+
+            return;
         }
+
+        System.out.println("Deletion cancelled.");
     }
 }

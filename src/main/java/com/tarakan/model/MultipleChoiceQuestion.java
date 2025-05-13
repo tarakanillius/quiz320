@@ -40,6 +40,7 @@ public class MultipleChoiceQuestion extends Question implements QuestionEvaluato
      */
     public MultipleChoiceQuestion(String text, int points, List<String> options, int correctOptionIndex) {
         super(text, points);
+        if (correctOptionIndex < 0 || correctOptionIndex > options.size()) throw new IllegalArgumentException("Invalid correct option index");
         this.options = options;
         this.correctOptionIndex = correctOptionIndex;
     }
@@ -64,9 +65,7 @@ public class MultipleChoiceQuestion extends Question implements QuestionEvaluato
      */
     @Override
     public boolean evaluate(Object response) {
-        if (!(response instanceof Integer)) {
-            return false;
-        }
+        if (!(response instanceof Integer)) return false;
 
         return ((Integer) response) == correctOptionIndex;
     }

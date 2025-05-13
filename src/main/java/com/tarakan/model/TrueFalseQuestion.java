@@ -1,4 +1,7 @@
 package com.tarakan.model;
+
+import com.tarakan.exception.QuizException;
+
 /**
  * Represents a true/false question in a quiz.
  * <p>
@@ -51,7 +54,7 @@ public class TrueFalseQuestion extends Question {
      */
     @Override
     public boolean evaluate(Object response) {
-        if (!(response instanceof Boolean)) return false;
+        if (!(response instanceof Boolean)) throw new QuizException("Response must be a boolean.");
 
         return ((Boolean) response) == correctAnswer;
     }

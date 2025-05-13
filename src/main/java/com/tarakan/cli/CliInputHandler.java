@@ -1,56 +1,112 @@
 package com.tarakan.cli;
 
 import java.util.Scanner;
+
 /**
- * Class for handling CLI input.
- * <p>
- * This class provides methods for handling various types of input in the CLI.
- * It uses a Scanner to read input from the user.
- * It provides methods for getting integer, string, and boolean inputs.
- * It also provides a method for closing the Scanner.
- * </p>
+ * Handles CLI user input with typed parsing and validation.
  */
 public class CliInputHandler {
-    /**
-     * Scanner for reading input from the user.
-     */
+
     private final Scanner scanner;
+
     /**
-     * Constructor for CliInputHandler.
-     * <p>
-     * This constructor initializes the CliInputHandler with the provided Scanner.
-     * </p>
-     * @param scanner Scanner for reading input from the user.
+     * Creates an input handler using the provided Scanner.
+     *
+     * @param scanner the Scanner for user input
      */
-    public CliInputHandler(Scanner scanner) {this.scanner = scanner;}
+    public CliInputHandler(Scanner scanner) {
+        if (scanner == null) throw new IllegalArgumentException("Scanner cannot be null");
+
+        this.scanner = scanner;
+    }
+
     /**
-     * Method to get an integer input from the user.
-     * @return The integer input from the user.
+     * Reads an integer from the user input.
+     *
+     * @return the integer input, or {@code null} if invalid
      */
-    public int getIntInput() {
+    public Integer getIntInput() {
+        String input = scanner.nextLine().trim();
+
         try {
-            return Integer.parseInt(scanner.nextLine());
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            return -1;
+            return null;
         }
     }
+
     /**
-     * Method to get a string input from the user.
-     * @return The string input from the user.
+     * Reads a string from the user input.
+     *
+     * @return the trimmed string input
      */
     public String getStringInput() {
-        return scanner.nextLine();
+        var temp = scanner.nextLine().trim();
+
+        if (temp.isEmpty() || temp.isBlank()) throw new IllegalArgumentException("String cannot be empty");
+
+        return temp;
     }
+
     /**
-     * Method to get a boolean input from the user.
-     * @param trueValue The string value that represents true.
-     * @return The boolean input from the user.
+     * Reads a boolean from the user input.
+     *
+     * @param trueValue the string that should be interpreted as true (case-insensitive)
+     * @return true if input equals trueValue, false otherwise
      */
     public boolean getBooleanInput(String trueValue) {
-        return scanner.nextLine().equalsIgnoreCase(trueValue);
+        if (trueValue == null) throw new IllegalArgumentException("trueValue cannot be null");
+
+        return scanner.nextLine().trim().equalsIgnoreCase(trueValue);
     }
+
+    public String promptNonEmptyString(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input;
+
+            try {
+                input = getStringInput();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid input. Value cannot be empty.");
+                continue;
+            }
+
+            return input;
+        }
+    }
+
+    public int promptPositiveInt(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            Integer input = getIntInput();
+
+            if (input == null || input < 0) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                continue;
+            }
+
+            return input;
+        }
+
+    }
+
+    public int promptBoundedInt(String prompt, int minInclusive, int maxInclusive) {
+        while (true) {
+            System.out.print(prompt);
+            Integer input = getIntInput();
+
+            if (input == null || input < minInclusive || input > maxInclusive) {
+                System.out.println("Invalid input. Please enter a number between " + minInclusive + " and " + maxInclusive + ".");
+                continue;
+            }
+
+            return input;
+        }
+    }
+
     /**
-     * Method to close the Scanner.
+     * Closes the scanner.
      */
     public void close() {
         scanner.close();

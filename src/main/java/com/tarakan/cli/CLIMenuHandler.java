@@ -1,6 +1,5 @@
 package com.tarakan.cli;
 
-import com.tarakan.exception.QuizException;
 import com.tarakan.service.QuizService;
 import com.tarakan.model.*;
 /**
@@ -71,12 +70,11 @@ public class CliMenuHandler {
     private void createQuiz() {
         Quiz quiz = quizCreator.createQuiz();
 
-        try {
+        if (quiz != null) {
             quizService.createQuiz(quiz);
-            System.out.println("Quiz created successfully!");
-        } catch (QuizException e) {
-            System.out.println("Error creating quiz: " + e.getMessage());
         }
+
+        System.out.println("Quiz creation cancelled.");
     }
     /**
      * Lists all quizzes.
@@ -96,9 +94,7 @@ public class CliMenuHandler {
     private void takeQuiz() {
         Quiz quiz = quizManager.selectQuiz("take");
 
-        if (quiz != null) {
-            quizTaker.takeQuiz(quiz);
-        }
+        if (quiz != null) quizTaker.takeQuiz(quiz);
     }
     /**
      * Deletes a quiz using the quiz manager.
